@@ -1,2 +1,12 @@
 
-<h1>user</h1>
+<h1>List User</h1>
+<% users.forEach((user, i) => { %>
+    <br>
+    <%= i+1 %>
+    <br>
+    <%= user.name %>
+    <br>
+    <%= user.username %>
+    <br>
+    <%= user.level %>
+<% }) %>

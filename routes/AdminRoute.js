@@ -7,15 +7,15 @@ const ConfirmController = require("../app/controllers/admin/ConfirmController");
 const UserController = require("../app/controllers/admin/UserController");
 
 // Route untuk halaman dashboard
-router.get('/admin/dashboard', DashboardController.index);
+router.get('/dashboard', DashboardController.index);
 
 // Route untuk halaman history
-router.get('/admin/history', HistoryController.index);
+router.get('/history', HistoryController.index);
 
 // Route untuk halaman konfirmasi donasi
-router.get('/admin/confirm', ConfirmController.index);
+router.get('/confirm', ConfirmController.index);
 
 // Route untuk halaman user
-router.get('/admin/user', UserController.index);
+router.get('/user', UserController.index);
 
 module.exports = router;

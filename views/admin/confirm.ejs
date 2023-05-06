@@ -1,2 +1,16 @@
 
 <h1>Konfirmasi</h1>
+<% donations.forEach((donation, i) => { %>
+  <br>
+  <%= i+1 %>
+  <br>
+  <%= donation.name %>
+  <br>
+  <%= donation.condition %>
+  <br>
+  <%= donation.address %>
+  <br><br>
+  <dic class="col-4">
+    <img src="/images/donations/<%=donation.image%>" alt="" srcset="" class="img-fluid">
+  </dic>
+<% }) %>
