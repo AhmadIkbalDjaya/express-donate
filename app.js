@@ -9,7 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const adminRouter = require("./routes/AdminRoute");
-app.use("/admin", adminRouter);
+const userRouter = require("./routes/UserRoute");
+app.use("", adminRouter);
+app.use("", userRouter);
 
 const port = 3000;
 app.listen(port, () => {

@@ -1,7 +1,7 @@
 module.exports = {
   index: (req, res) => {
-    res.render('admin/dashboard', {
-      title: "Admin",
+    res.render('user/message', {
+      title: "Pesan",
       layout: "layouts/layout"
     })
   },
