@@ -24,7 +24,7 @@ module.exports = {
         return res.status(404).json({ message: 'Donation not found' });
       }
 
-      donation.is_accept = 'Accepted';
+      donation.is_accept = "Accepted"
       donation.status = "Berlansung"
       await donation.save();
 

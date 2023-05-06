@@ -1,1 +1,79 @@
-<h1>User Dashboard</h1>
+<!-- Tampilan Dashboard -->
+<h1>Dashboard</h1>
+
+<% if (donations.length === 0) { %>
+  <p>Tidak ada donasi yang tersedia.</p>
+<% } else { %>
+  <ul>
+    <% donations.forEach((donation) => { %>
+      <li>
+        <img src="<%= donation.image %>" alt="<%= donation.name %>" />
+        <h3><%= donation.name %></h3>
+        <p><%= donation.address %></p>
+        <a href="#" class="btn-detail" data-donation-id="<%= donation._id %>">Detail</a>
+      </li>
+      <!-- Modal Detail -->
+      <div id="modal-detail" class="modal">
+        <div class="modal-content">
+          <h2>Detail Donasi</h2>
+          <p>Nama: <span id="modal-donation-name"></span></p>
+          <p>Alamat: <span id="modal-donation-address"></span></p>
+          <!-- tambahkan informasi lainnya yang diperlukan -->
+          <button class="btn-close">Tutup</button>
+          <div id="modal-chat" class="modal">
+            <div class="modal-content">
+              <h2>Chat</h2>
+              <form id="chat-form">
+                <input type="text" id="chat-message" placeholder="Ketik pesan Anda" />
+                <button type="submit">Kirim</button>
+              </form>
+              <button class="btn-close">Tutup</button>
+            </div>
+          </div>
+          <a href="#" class="btn-chat" data-donation-id="<%= donation._id %>">Chat</a>
+        </div>
+      </div>
+    <% }) %>
+  </ul>
+<% } %>
+
+
+<!-- Script untuk mengatur perilaku modal -->
+<script>
+  const btnDetails = document.querySelectorAll('.btn-detail');
+  const btnChat = document.querySelectorAll('.btn-chat');
+  const modalDetail = document.getElementById('modal-detail');
+  const modalChat = document.getElementById('modal-chat');
+  const modalDonationName = document.getElementById('modal-donation-name');
+  const modalDonationAddress = document.getElementById('modal-donation-address');
+  const btnClose = document.querySelectorAll('.btn-close');
+
+  // Tampilkan modal detail
+  btnDetails.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const donationId = btn.getAttribute('data-donation-id');
+      // Dapatkan data detail donasi dari backend menggunakan AJAX atau fetch
+      // Setel nilai modalDonationName dan modalDonationAddress sesuai dengan data yang diperoleh
+      modalDetail.style.display = 'block';
+    });
+  });
+
+  // Tampilkan modal chat
+  btnChat.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const donationId = btn.getAttribute('data-donation-id');
+      // Setel nilai modalDonationName dan modalDonationAddress sesuai dengan data yang diperoleh
+      modalChat.style.display = 'block';
+    });
+  });
+
+  // Tutup modal
+  btnClose.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      modalDetail.style.display = 'none';
+      modalChat.style.display = 'none';
+    });
+  });
+</script>

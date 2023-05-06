@@ -23,7 +23,7 @@ router.post('/donation/:id/reject', ConfirmController.rejectDonation);
 // Route untuk halaman user
 router.get('/user', UserController.index);
 // DELETE User
-router.get('/user/delete/:id', UserController.deleteUser);
+router.post('/user/delete/:id', UserController.deleteUser);
 // POST Edit User
 router.post('/user/edit/:id', UserController.editUser);
 

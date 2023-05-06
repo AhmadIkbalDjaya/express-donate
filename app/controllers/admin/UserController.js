@@ -1,3 +1,4 @@
+const Donation = require('../../models/donation');
 const User = require('../../models/user');
 
 module.exports = {
@@ -33,11 +34,26 @@ module.exports = {
 
   // Delete User
   deleteUser: async (req, res) => {
-    const userId = req.params.id;
+    const userId = req.params.id
 
     try {
-      // Find and delete the user
-      await User.findByIdAndDelete(userId);
+      // // Delete all donations with matching user ID
+      // await Donation.deleteMany({ user: userId });
+      // Delete all donations with matching user ID
+      await Donation.deleteMany({ user: req.params.id });
+      // await Donation.where('user', userId).remove();
+
+      // Find all donations with matching user ID
+    // const donations = await Donation.find({ user: { $in: [userId] } });
+
+    // Delete all donations
+    // donation > 1 ? 
+    // await Donation.deleteMany({ _id: { $in: donations.map(donation => donation._id) } }) :
+    // await Donation.deleteOne({ _id: { $in: donations.map(donation => donation._id) } });
+
+
+    // Find and delete the user
+    await User.findByIdAndDelete(userId);
 
       res.redirect('/admin/user');
     } catch (err) {
