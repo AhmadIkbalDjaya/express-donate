@@ -1,2 +1,24 @@
 
 <h1>History</h1>
+<h1>History Donasi</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Barang</th>
+      <th>Tanggal</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% donations.forEach(donation => { %>
+      <tr>
+        <td><%= donation.user.username %></td>
+        <td><%= donation.name %></td>
+        <td><%= donation.createdAt.toDateString() %></td>
+        <td><%= donation.status %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

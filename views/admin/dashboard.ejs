@@ -1,2 +1,19 @@
 
 <h1>Dashboard</h1>
+
+<table class="table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Condition</th>
+    <th>Address</th>
+    <th>Image</th>
+  </tr>
+  <% donations.forEach(donation => { %>
+    <tr>
+      <td><%= donation.name %></td>
+      <td><%= donation.condition %></td>
+      <td><%= donation.address %></td>
+      <td><img src="/images/donations/<%= donation.image %>" alt="<%= donation.name %>" width="50" height="50"></td>
+    </tr>
+  <% }) %>
+</table>

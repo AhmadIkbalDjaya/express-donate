@@ -1,8 +1,17 @@
+const Donation = require('../../models/donation');
+
 module.exports = {
-  index: (req, res) => {
-    res.render('admin/dashboard', {
-      title: "Admin",
-      layout: "layouts/layout"
-    })
+  index: async (req, res) => {
+    try {
+      const donations = await Donation.find({status: "Berlansung"});
+      res.render('admin/dashboard', {
+        title: "Admin",
+        layout: "layouts/layout",
+        donations,
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Terjadi kesalahan dalam memuat data donasi");
+    }
   },
 }
