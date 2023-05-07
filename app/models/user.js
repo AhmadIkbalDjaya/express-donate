@@ -1,16 +1,12 @@
 const mongoose = require("mongoose");
 
 const User = mongoose.model("User", {
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
+  username: {
     type: String,
     required: true,
     unique: true,
   },
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,

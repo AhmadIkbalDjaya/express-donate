@@ -1,24 +1,23 @@
 const express = require("express");
 const app = express();
 
-// const methodOverride = require('method-override');
-// app.use(methodOverride('_method'));
-
 // setup ejs & layouts
-const expressLayouts = require('express-ejs-layouts');
-app.set('view engine', 'ejs');
+const expressLayouts = require("express-ejs-layouts");
+app.set("view engine", "ejs");
 app.use(expressLayouts);
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // setup mongodb
-require("./config/database")
+require("./config/database");
 
 // route
 const adminRouter = require("./routes/AdminRoute");
 const userRouter = require("./routes/UserRoute");
+const loginRegisRouter = require("./routes/LoginRegisRoute");
 app.use("/admin", adminRouter);
 app.use("", userRouter);
+app.use("", loginRegisRouter);
 
 const port = 3000;
 app.listen(port, () => {
