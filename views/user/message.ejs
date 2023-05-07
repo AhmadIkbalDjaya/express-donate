@@ -8,42 +8,44 @@
     </div>
   </div>
   <!-- loop here -->
-  <a href="" data-bs-toggle="modal" data-bs-target="#messageModal">
-    <div class="row m-2">
-      <div class="col-md-12 card py-3">
-        <div class="row">
-          <div class="col-1">
-            <img src="/images/user.jpg" alt="img" class="img-fluid rounded-circle" />
-          </div>
-          <div class="col-8">
-            <p class="pesan-header">SEPEDA</p>
-            <p class="pesan-title">Halo kak saya ingin menanyakan barang kakak yang ini</p>
-          </div>
-          <div class="col-3">
-            <p class="pesan-date">19-02-2023</p>
-            <p class="pesan-date">10:08:04</p>
+  <% messages.forEach((message, index) => { %>
+    <a>
+      <div class="row m-2">
+        <div class="col-md-12 card py-3">
+          <div class="row">
+            <div class="col-1">
+              <img src="/images/user.jpg" alt="img" class="img-fluid rounded-circle" />
+            </div>
+            <div class="col-8">
+              <p class="pesan-header"><%=message.donation.name%></p>
+              <p class="pesan-title"><%=message.content%></p>
+            </div>
+            <div class="col-3">
+              <p class="pesan-date">19-02-2023</p>
+              <p class="pesan-date">10:08:04</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </a>
-  <!-- Modal -->
-  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form action="">
-        <div class="modal-content">
-          <div class="modal-body py-5 modalColor">
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label">Balas Pesan</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="row">
-              <button type="button" class="btn btn-color">Kirim</button>
+    </a>
+    <!-- Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form action="">
+          <div class="modal-content">
+            <div class="modal-body py-5 modalColor">
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Balas Pesan</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+              <div class="row">
+                <button type="button" class="btn btn-color">Kirim</button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
+  <% }) %>
   <!-- end loop -->
 </div>

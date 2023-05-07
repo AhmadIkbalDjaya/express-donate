@@ -4,7 +4,7 @@ const User = require('../../models/user');
 module.exports = {
   index: async(req, res) => {
     try {
-      const donations = await Donation.find({status: "Berlansung"}).lean();
+      const donations = await Donation.find({status: "Berlansung"}).populate('user', '_id');
       res.render('user/dashboard', {
         title: "ReDonate",
         layout: "layouts/layout",

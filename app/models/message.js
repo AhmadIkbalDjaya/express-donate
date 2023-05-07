@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const Message = mongoose.model('Messsage', {
   sender: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
     required: true
   },
   recipient: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
     required: true
   },
   donation: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Donation',
     required: true,
   },

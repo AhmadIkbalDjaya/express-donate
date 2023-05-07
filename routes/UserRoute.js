@@ -23,5 +23,6 @@ router.post('/storeDonation', checkUserLevel, DonateController.storeDonation);
 
 // Route untuk halaman user
 router.get('/message', checkUserLevel, MessageController.index);
+router.post('/messageSend', checkUserLevel, MessageController.send)
 
 module.exports = router;
