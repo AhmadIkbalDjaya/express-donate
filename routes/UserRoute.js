@@ -11,9 +11,12 @@ router.get('/dashboard', DashboardController.index);
 
 // Route untuk halaman history
 router.get('/history', HistoryController.index);
+router.post('/donate/delete/:id', HistoryController.deleteDonation);
+router.post('/donate/update/:id', HistoryController.updateDonation);
 
 // Route untuk halaman konfirmasi donasi
-router.get('/Donate', DonateController.index);
+router.get('/donate', DonateController.index);
+router.post('/storeDonation', DonateController.storeDonation);
 
 // Route untuk halaman user
 router.get('/message', MessageController.index);

@@ -13,11 +13,11 @@ const Donation = mongoose.model('Donation', {
     required: true,
   },
   image: {
-    type: String
+    type: String,
   },
   condition: {
     type: String,
-    enum: ["Baik", "Masih Layak"]
+    required: true,
   },
   status: {
     type: String,

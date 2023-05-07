@@ -1,79 +1,88 @@
-<!-- Tampilan Dashboard -->
-<h1>Dashboard</h1>
-
-<% if (donations.length === 0) { %>
-  <p>Tidak ada donasi yang tersedia.</p>
-<% } else { %>
-  <ul>
-    <% donations.forEach((donation) => { %>
-      <li>
-        <img src="<%= donation.image %>" alt="<%= donation.name %>" />
-        <h3><%= donation.name %></h3>
-        <p><%= donation.address %></p>
-        <a href="#" class="btn-detail" data-donation-id="<%= donation._id %>">Detail</a>
-      </li>
-      <!-- Modal Detail -->
-      <div id="modal-detail" class="modal">
-        <div class="modal-content">
-          <h2>Detail Donasi</h2>
-          <p>Nama: <span id="modal-donation-name"></span></p>
-          <p>Alamat: <span id="modal-donation-address"></span></p>
-          <!-- tambahkan informasi lainnya yang diperlukan -->
-          <button class="btn-close">Tutup</button>
-          <div id="modal-chat" class="modal">
-            <div class="modal-content">
-              <h2>Chat</h2>
-              <form id="chat-form">
-                <input type="text" id="chat-message" placeholder="Ketik pesan Anda" />
-                <button type="submit">Kirim</button>
-              </form>
-              <button class="btn-close">Tutup</button>
+<div class="col-md-8">
+  <div class="row justify-content-end">
+    <div class="col-md-6">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="row">
+        <% donations.forEach((donation) => { %>
+          <div class="col-md-6 my-3">
+            <div data-bs-toggle="modal" data-bs-target="#detailModal<%= donation._id %>" style="cursor: pointer;">
+              <div class="card-produk">
+                <div class="container-fluid">
+                  <div class="row py-3">
+                    <div class="col-5 align-self-center">
+                      <img src="/images/donations/<%= donation.image %>" alt="img" class="img-fluid" />
+                    </div>
+                    <div class="col-7">
+                      <p class="tp1"><%= donation.name %></p>
+                      <p class="tp2"><%= donation.condition %></p>
+                      <p class="tp3"><i class="bi bi-pin-fill"></i> <%= donation.address %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <a href="#" class="btn-chat" data-donation-id="<%= donation._id %>">Chat</a>
-        </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="detailModal<%= donation._id %>" tabindex="-1" aria-labelledby="detailModal<%= donation._id %>Label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body py-5 modalColor">
+                  <p class="detail"><img src="/images/icon1.png" alt="img" height="23px" /> Detail Produk</p>
+                  <p class="ms-4"><%= donation.condition %></p>
+                  <!-- <p class="ms-4">Etalase pemakaian</p> -->
+                  <p class="detail"><img src="/images/icon2.png" alt="img" height="23px" />Deskripsi Produk</p>
+                  <p class="ms-4"><%= donation.description %></p>
+                  <p class="detail"><img src="/images/icon7.png" alt="img" height="23px" />Alamat</p>
+                  <p class="ms-4"><%= donation.address %></p>
+                  <div class="row">
+                    <div class="col-md-12 text-center" data-bs-toggle="modal" data-bs-target="#messageModal<%= donation._id %>">
+                      <button type="button" class="btn btn-color">Chat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal2 -->
+          <div class="modal fade" id="messageModal<%= donation._id %>" tabindex="-1" aria-labelledby="messageModal<%= donation._id %>Label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form action="">
+                  <div class="modal-body py-5 modalColor">
+                    <p class="detail"><img src="/images/icon3.png" alt="img" height="23px" /> Tulis Pesan</p>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p>Subject : <%= donation.name %></p>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="mb-3">
+                          <form action="" method="post">
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-color">Kirim</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
       </div>
-    <% }) %>
-  </ul>
-<% } %>
-
-
-<!-- Script untuk mengatur perilaku modal -->
-<script>
-  const btnDetails = document.querySelectorAll('.btn-detail');
-  const btnChat = document.querySelectorAll('.btn-chat');
-  const modalDetail = document.getElementById('modal-detail');
-  const modalChat = document.getElementById('modal-chat');
-  const modalDonationName = document.getElementById('modal-donation-name');
-  const modalDonationAddress = document.getElementById('modal-donation-address');
-  const btnClose = document.querySelectorAll('.btn-close');
-
-  // Tampilkan modal detail
-  btnDetails.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const donationId = btn.getAttribute('data-donation-id');
-      // Dapatkan data detail donasi dari backend menggunakan AJAX atau fetch
-      // Setel nilai modalDonationName dan modalDonationAddress sesuai dengan data yang diperoleh
-      modalDetail.style.display = 'block';
-    });
-  });
-
-  // Tampilkan modal chat
-  btnChat.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const donationId = btn.getAttribute('data-donation-id');
-      // Setel nilai modalDonationName dan modalDonationAddress sesuai dengan data yang diperoleh
-      modalChat.style.display = 'block';
-    });
-  });
-
-  // Tutup modal
-  btnClose.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      modalDetail.style.display = 'none';
-      modalChat.style.display = 'none';
-    });
-  });
-</script>
+    </div>
+  </div>
+</div>
