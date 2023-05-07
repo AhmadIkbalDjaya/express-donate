@@ -9,6 +9,7 @@ module.exports = {
         title: "User",
         layout: "layouts/layout",
         users: users,
+        session: req.session
       });
     } catch (err) {
       console.error(err);

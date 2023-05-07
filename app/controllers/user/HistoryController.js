@@ -20,12 +20,14 @@ const upload = multer({ storage });
 
 module.exports = {
   index: async (req, res) => {
+    const userId = req.session.user._id;
     try {
-      const donations = await Donation.find({user: "645619f846d922a6eb16fd55"});
+      const donations = await Donation.find({user: userId});
       res.render('user/history', {
         title: "Riwayat Donasi",
         layout: "layouts/layout",
         donations,
+        session: req.session,
       })
     } catch (err) {
       console.error(err);
@@ -53,8 +55,6 @@ module.exports = {
         donation.condition = condition;
         donation.address = address;
         if(req.file){
-          // if (oldImage) {
-          // }
           fs.unlinkSync(`public/images/donations/${oldImage}`);
           donation.image = req.file.filename;
         }
@@ -67,64 +67,6 @@ module.exports = {
         res.redirect('/history');
       }
     });
-    // const donationId = req.params.id;
-    // const { name, description, condition, address } = req.body;
-
-    // try {
-    //   // Temukan donasi berdasarkan ID
-    //   const donation = await Donation.findById(donationId);
-
-    //   if (!donation) {
-    //     return res.status(404).json({ message: 'Donasi tidak ditemukan' });
-    //   }
-
-    //   // Simpan nama gambar lama sebelum memperbarui
-    //   const oldImage = donation.image;
-
-    //   // Perbarui data donasi
-    //   donation.name = name;
-    //   donation.description = description;
-    //   donation.condition = condition;
-    //   donation.address = address;
-
-    //   await donation.save()
-    //   res.redirect('/history');
-    //   // Upload gambar baru menggunakan Multer
-    //   // if(req.file){
-    //   //   upload.single('image')(req, res, async (err) => {
-    //   //     if (err) {
-    //   //       console.error(err);
-    //   //       return res.status(500).json({ message: 'Terjadi kesalahan saat mengunggah gambar' });
-    //   //     }
-  
-    //   //     // Jika ada gambar baru diunggah, hapus gambar lama dan simpan gambar baru
-    //   //     // if (req.file) {
-    //   //       // Hapus gambar lama
-    //   //       if (oldImage) {
-    //   //         fs.unlink(`public/images/donations/${oldImage}`);
-    //   //       }
-  
-    //   //       // Simpan nama gambar baru
-    //   //       donation.image = req.file.filename;
-    //   //     // }
-  
-    //   //     // Simpan donasi yang diperbarui
-    //   //     await donation.save();
-  
-    //   //     res.redirect('/history');
-    //   //   });
-        
-    //   // } 
-    //   // else {
-    //   //   donation.image = oldImage
-    //   //   await donation.save();
-    //   //   res.redirect('/history');
-    //   // }
-      
-    // } catch (err) {
-    //   console.log(err);
-    //   res.redirect('/history');
-    // }
   },
   
   deleteDonation: async (req, res) => {

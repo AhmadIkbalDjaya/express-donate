@@ -1,4 +1,5 @@
 <!-- admin -->
+<% if (session && session.user && session.user.level == 'Admin') { %>
 <div class="col-md-4 t-card">
   <div class="row card h-100 ms-1">
     <div class="col-md-12 h-100">
@@ -12,7 +13,7 @@
           <p>Admin</p>
         </div>
         <div class="col-md-8 align-self-center name-user">
-          <p class="fw-bold">Irham Syahputra</p>
+          <p class="fw-bold"><%=session.user.username%></p>
         </div>
       </div>
       <div class="row element card-body mb-auto">
@@ -71,7 +72,7 @@
       </div>
       <div class="row card-footer">
         <div class="col-md-12">
-          <a href="/login.html">
+          <a href="/logout">
             <p>
               <img
                 src="/images/icon5.png"
@@ -87,12 +88,14 @@
     </div>
   </div>
 </div>
+<% } %>
 
 <!-- user -->
-<!-- <div class="col-md-4 t-card">
+<% if (session && session.user && session.user.level == 'User') { %>
+<div class="col-md-4 t-card">
   <div class="row card h-100 ms-1">
     <div class="col-md-12 h-100">
-      <div class="row card-header profile">
+      <a href="/profile" class="row card-header profile">
         <div class="col-md-3 text-center kategori">
           <img
             src="/images/user.jpg"
@@ -102,9 +105,9 @@
           <p>User</p>
         </div>
         <div class="col-md-8 align-self-center name-user">
-          <p class="fw-bold">Irham Syahputra</p>
+          <p class="fw-bold"><%=session.user.username%></p>
         </div>
-      </div>
+      </a>
       <div class="row element card-body mb-auto">
         <div class="col-md-12 card-f">
           <a href="/dashboard">
@@ -161,7 +164,7 @@
       </div>
       <div class="row card-footer">
         <div class="col-md-12">
-          <a href="/login.html">
+          <a href="/logout">
             <p>
               <img
                 src="/images/icon5.png"
@@ -176,4 +179,5 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
+<% } %>

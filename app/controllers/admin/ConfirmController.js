@@ -8,6 +8,7 @@ module.exports = {
         title: "Konfirmasi",
         layout: "layouts/layout",
         donations: donations,
+        session: req.session
       });
     } catch (err) {
       console.log(err);

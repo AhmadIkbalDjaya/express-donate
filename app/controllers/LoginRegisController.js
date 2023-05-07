@@ -14,12 +14,39 @@ module.exports = {
   },
 
   loginProcess: async (req, res) => {
+    const { username, password } = req.body;
 
+    try {
+      // Cari pengguna berdasarkan username
+      const user = await User.findOne({ username });
+
+      // Periksa apakah pengguna ditemukan dan password cocok
+      if (!user || user.password !== password) {
+        return res.redirect('/login?error=Username atau password salah');
+      }
+
+      // Set session data
+      req.session.user = user;
+      // Login berhasil, redirect ke halaman sukses dengan data pengguna
+      if (user.level == "Admin") {
+        return res.redirect("/admin/dashboard");
+      } else {
+        return res.redirect("/dashboard");
+      }
+      // return res.redirect('/login-success');
+    } catch (error) {
+      console.error(error);
+      return res.redirect('/login?error=Terjadi kesalahan pada server');
+    }
   },
 
-  // logout: async (req, res) => {
+  logout: async (req, res) => {
+    // Hapus data pengguna dari session
+    req.session.user = null;
 
-  // },
+    // Redirect ke halaman login setelah logout
+    res.redirect('/login');
+  },
 
   registration: async (req, res) => {
     try {

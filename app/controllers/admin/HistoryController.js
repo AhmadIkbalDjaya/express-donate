@@ -9,6 +9,7 @@ module.exports = {
         title: "History",
         layout: "layouts/layout",
         donations,
+        session: req.session
       });
     } catch (err) {
       console.error(err);

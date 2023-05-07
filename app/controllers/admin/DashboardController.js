@@ -8,6 +8,7 @@ module.exports = {
         title: "Admin",
         layout: "layouts/layout",
         donations,
+        session: req.session
       });
     } catch (err) {
       console.log(err);

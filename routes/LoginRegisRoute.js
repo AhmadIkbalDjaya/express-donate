@@ -5,7 +5,7 @@ const LoginRegisController = require("../app/controllers/LoginRegisController")
 
 router.get("/login", LoginRegisController.login);
 router.post("/loginProcess", LoginRegisController.loginProcess);
-// router.post("/logout", LoginRegisController.logout);
+router.get("/logout", LoginRegisController.logout);
 
 router.get('/registration', LoginRegisController.registration);
 router.post("/registrationProcess", LoginRegisController.registrationProcess);

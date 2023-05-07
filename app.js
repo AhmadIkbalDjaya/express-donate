@@ -1,5 +1,12 @@
 const express = require("express");
 const app = express();
+const session = require('express-session');
+
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // setup ejs & layouts
 const expressLayouts = require("express-ejs-layouts");
