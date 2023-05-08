@@ -43,9 +43,11 @@
                   <p class="detail"><img src="/images/icon7.png" alt="img" height="23px" />Alamat</p>
                   <p class="ms-4"><%= donation.address %></p>
                   <div class="row">
-                    <div class="col-md-12 text-center" data-bs-toggle="modal" data-bs-target="#messageModal<%= donation._id %>">
-                      <button type="button" class="btn btn-color">Chat</button>
-                    </div>
+                    <% if (session.user._id != donation.user._id) { %>
+                      <div class="col-md-12 text-center" data-bs-toggle="modal" data-bs-target="#messageModal<%= donation._id %>">
+                        <button type="button" class="btn btn-color">Chat</button>
+                      </div>
+                    <% } %>
                   </div>
                 </div>
               </div>

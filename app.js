@@ -9,6 +9,7 @@ app.use(session({
 }));
 
 // setup ejs & layouts
+const moment = require('moment');
 const expressLayouts = require("express-ejs-layouts");
 app.set("view engine", "ejs");
 app.use(expressLayouts);

@@ -7,6 +7,13 @@ const DonateController = require("../app/controllers/user/DonateController");
 const MessageController = require("../app/controllers/user/MessageController");
 
 const { checkUserLevel, checkAdminLevel } = require('../middlewares/authMiddleware');
+router.get('/', (req, res) => {
+  if (req.session.user && req.session.user.level === 'Admin') {
+    res.redirect('/admin/dashboard');
+  } else {
+    res.redirect('/dashboard');
+  }
+});
 // Route untuk halaman dashboard
 router.get('/dashboard', checkUserLevel, DashboardController.index);
 router.get('/profile', checkUserLevel, DashboardController.profile);

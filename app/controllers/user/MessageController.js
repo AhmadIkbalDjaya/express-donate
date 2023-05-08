@@ -1,16 +1,19 @@
 const Message = require('../../models/message');
+const moment = require('moment');
 
 module.exports = {
   index: async(req, res) => {
     userId = req.session.user._id;
-    const messages = await Message.find({recipient: userId}).populate('donation', 'name');
-    // res.send(messages);
+    const messages = await Message.find({recipient: userId})
+    .populate('donation', '_id name image')
+    .populate('sender', '_id username');
     try {
       res.render('user/message', {
         title: "Pesan",
         layout: "layouts/layout",
         session: req.session,
         messages,
+        moment: moment,
       });   
     } catch (err) {
       console.error(error);
@@ -35,7 +38,7 @@ module.exports = {
       // Simpan pesan ke database
       await newMessage.save();
 
-      return res.redirect('/dashboard');
+      return res.redirect('/message');
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
