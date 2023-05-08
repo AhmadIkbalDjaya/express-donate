@@ -5,7 +5,8 @@ const checkUserLevel = (req, res, next) => {
     next();
   } else {
     // Bukan level User, kirim respons error
-    res.render('error', { layout: false, message: 'Akses ditolak' });
+    // res.render('error', { layout: false, message: 'Akses ditolak' });
+    res.redirect('/login');
   }
 };
 
@@ -16,7 +17,8 @@ const checkAdminLevel = (req, res, next) => {
     next();
   } else {
     // Bukan level Admin, kirim respons error
-    res.render('error', { layout: false, message: 'Akses ditolak' });
+    // res.render('error', { layout: false, message: 'Akses ditolak' });
+    res.redirect('/login');
   }
 };
 
